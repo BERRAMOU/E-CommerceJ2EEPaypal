@@ -19,27 +19,27 @@ public class Panier extends HttpServlet {
             String html = "<html>\n" +
                     "<head>\n" +
                     "    <title>Dashboard</title>\n" +
+                    "    <link rel='stylesheet' href='/style.css' type='text/css'>\n" +
                     "</head>\n" +
                     "<body>\n" +
-                    "<h1>Votre Identifiant : "+ session.getAttribute("username") +"\n" +
+                    "<h1 class='header-info'>Votre Identifiant : "+ session.getAttribute("username") +"\n" +
                     "    <a href='/Logout'><input type='button' value='Se Deconnecter'></a>\n" +
                     "    <a href='/Dashboard'><input type='button' value='Dashboard Produit'></a>\n" +
-                    "</h1>\n" +
-                    "    <br/><hr/>";
+                    "</h1>";
             JDBC connector = new JDBC();
             String[] list = connector.getPanier((String)session.getAttribute("username"));
             if(list==null || list.length==0){
                 html += "<h2>Votre Panier est vide !</h2>";
             }else{
                 html += "<h2>Votre Panier contient :</h2><br>" +
-                        "<form action=\"https://www.sandbox.paypal.com/cgi-bin/webscr\" method=\"post\">\n"+
+                        "<form action=\"https://www.sandbox.paypal.com/cgi-bin/webscr\" method=\"post\" name='paypal-form'>\n"+
                         "    <input type=\"hidden\" name=\"cmd\" value=\"_cart\">\n" +
                         "    <input type=\"hidden\" name=\"upload\" value=\"1\">\n" +
                         "    <input type=\"hidden\" name=\"business\" value=\"mpsi2014-facilitator@gmail.com\">\n";
                 String[] prod;
                 for (short i=0;i<list.length;i++) {
                     String str = list[i];
-                    html += "<h2>\n" + str +"</h2><hr><br>";
+                    html += "<h2 class='produit'>" + str +"</h2>";
                     prod = str.split(" ");
                     html += "    <input type=\"hidden\" name=\"item_name_"+(i+1)+"\" value=\""+ prod[0] +"\">\n" +
                             "    <input type=\"hidden\" name=\"currency_code\" value=\"USD\">\n" +

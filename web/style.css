@@ -1,0 +1,59 @@
+body,html{
+    background-color: aquamarine;
+    margin: 0;
+    padding: 0;
+}
+.login-form{
+    width: 400px;
+}
+.container{
+    margin-left: 500px;
+    margin-top: 200px;
+}
+.login-form input{
+    border: 0;
+    color: black;
+    height: 30px;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+input[type="submit"] , input[type="button"]{
+    border:0;
+    padding: 5px;
+    background-color: #e74c3c;
+    color: white;
+}
+.header-info{
+    padding: 20px;
+    background-color: #4aa3df;
+}
+.header-info input{
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.produit{
+    margin: 20px;
+    padding: 20px;
+    width: 500px;
+    background-color: #16a085;
+    color: white;
+}
+.produit input[type="submit"]{
+    padding: 10px;
+}
+.produit-info{
+    font-size: 1.5em;
+    color: white;
+    margin-right: 50px;
+}
+form[action='/AjouterAuPanier']{
+    display: inline-block;
+}
+form[name="paypal-form"] input[type="submit"]{
+    padding: 10px;
+    font-size: 1.3em;
+    width: 100px;
+    height: 50px;
+}

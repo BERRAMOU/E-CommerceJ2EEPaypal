@@ -16,24 +16,26 @@ public class Dashboard extends HttpServlet {
         HttpSession session = request.getSession();
         if (session.getAttribute("username") != null) {
             String html = "<html>\n" +
-                    "<head>\n"+
-                    "    <title>Dashboard</title>\n"+
+                    "<head>\n" +
+                    "    <title>Dashboard</title>\n" +
+                    "    <link rel='stylesheet' href='/style.css' type='text/css'>\n" +
                     "</head>\n" +
                     "<body>\n" +
-                    "<h1>Votre Identifiant : " + session.getAttribute("username") + "\n" +
+                    "<h1 class='header-info'>Votre Identifiant : " + session.getAttribute("username") + "\n" +
                     "    <a href='/Logout'><input type='button' value='Se Deconnecter'></a>\n" +
                     "    <a href='/Panier'><input type='button' value='Voir Panier'></a>\n" +
-                    "<br/><hr/>\n";
+                    "</h1>";
             ArrayList<Produit> produits;
             JDBC connector = new JDBC();
             produits = connector.getProduits();
             if(produits.isEmpty()){
                 html += "<h2>Ya pas de produits !???</h2>";
             }
-            for(Produit prod : produits){
-                html += "<h2>"+ prod.nom +" | prix :"+ prod.prix +"$ </h2>";
-                html += "<form action='/AjouterAuPanier' method='post'><input type='hidden' name='produit' value='"+ prod.nom+" :"+prod.prix+"$"+ "'><input type='submit' value='Ajouter Au Panier !'></form><br><hr><br>";
-            }
+                for(Produit prod : produits){
+                    html += "   <div class='produit'><span class='produit-info'>"+ prod.nom +" | prix :"+ prod.prix +"$ </span>";
+                    html += "   <form action='/AjouterAuPanier' method='post'><input type='hidden' name='produit' value='"+ prod.nom+" :"+prod.prix+"$"+ "'><input type='submit' value='Ajouter Au Panier !'></form></div>";
+                }
+
 
             html += "</body></html>";
             PrintWriter out = response.getWriter();
